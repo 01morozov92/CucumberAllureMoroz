@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hellocucumber</groupId>
+    <artifactId>CucumberAllureMoroz</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <cucumber.version>5.6.0</cucumber.version>
+        <junit.version>5.6.0</junit.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <allure.version>2.13.1</allure.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-cucumber4-jvm</artifactId>-->
+<!--            <version>2.13.8</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>5.6.1</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-junit5</artifactId>-->
+<!--            <version>2.13.1</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <forkCount>2</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <reportsDirectory>target/surefire-reports-${surefire.forkNumber}</reportsDirectory>
+<!--                    <systemPropertyVariables>-->
+<!--                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>-->
+<!--                        <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>-->
+<!--                        <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>-->
+<!--                    </systemPropertyVariables>-->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+<!--                        -Dcucumber.options="&#45;&#45;plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm &#45;&#45;plugin pretty"-->
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.qameta.allure</groupId>-->
+<!--                <artifactId>allure-maven</artifactId>-->
+<!--                <version>2.10.0</version>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
+</project>
